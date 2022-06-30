@@ -1,0 +1,723 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #303133;
+  background-color: #fff;
+}
+a {
+  color: mix(#fff, $--theme-red, 20%);
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    color: $--theme-red;
+    text-decoration: underline;
+  }
+}
+img {
+  vertical-align: middle;
+}
+
+
+/* Utils
+------------------------------ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+
+/* Animation
+------------------------------ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* Reset element-ui
+------------------------------ */
+.site-wrapper {
+  .el-pagination {
+    margin-top: 15px;
+    text-align: right;
+  }
+}
+
+
+/* Layout
+------------------------------ */
+.site-wrapper {
+  position: relative;
+  min-width: 1180px;
+}
+
+
+/* Sidebar fold
+------------------------------ */
+.navbar_header_new{
+  height: 50px;
+  line-height: 50px;
+  background: #fff;
+  margin-left: 24px;
+}
+.navbar_header_new-titlename{
+  font-size: 20px;
+  font-weight: bold;
+  font-family: FZYaSong-B-GBK;
+}
+.navbar_header_new-titlename>img{
+  width: 227px;
+  height: auto;
+  margin-top: -8px;
+  margin-left: 3px;
+}
+.navbar_header_new-title{
+  vertical-align: top;
+}
+.inline-block{
+  display: inline-block;
+}
+.site-sidebar--fold {
+  //.site-navbar__header,
+  //.site-navbar__brand,
+  .site-sidebar,
+  .site-sidebar__inner,
+  .el-menu.site-sidebar__menu {
+    width: 64px;
+    .el-menu-item,.el-submenu{
+      margin-left: -10px;
+    }
+  }
+  //.site-navbar__body,
+  .site-content__wrapper {
+    margin-left: 64px;
+  }
+  .site-navbar__brand {
+    &-lg {
+      display: none;
+    }
+    &-mini {
+      display: inline-block;
+    }
+  }
+  .site-sidebar,
+  .site-sidebar__inner {
+    overflow: initial;
+  }
+  .site-sidebar__menu-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+  .site-content--tabs > .el-tabs > .el-tabs__header {
+    left: 64px;
+  }
+}
+// animation 折叠切换的时候动画效果
+.site-navbar__header,
+.site-navbar__brand,
+.site-navbar__body,
+.site-sidebar,
+.site-sidebar__inner,
+.site-sidebar__menu.el-menu,
+.site-sidebar__menu-icon,
+.site-content__wrapper,
+.site-content--tabs > .el-tabs .el-tabs__header {
+  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;
+}
+
+
+/* Navbar
+------------------------------ */
+.site-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+  //background-color: $navbar--background-color;
+  //background-color: $sidebar--background-color-dark;
+  background: #fff;
+  .site-navbar__header{
+    .site-navbar__brand-lg,.site-navbar__brand-mini{
+      color:#000;
+      font-weight: 500;
+    }
+  }
+  &--inverse {
+    .site-navbar__body {
+      background-color: transparent;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu > .el-submenu__title {
+        color: #fff;
+        &:focus,
+        &:hover {
+          color: #fff;
+          background-color: mix(#000, $navbar--background-color, 15%);
+        }
+      }
+      > .el-menu-item.is-active,
+      > .el-submenu.is-active > .el-submenu__title {
+        border-bottom-color: mix(#fff, $navbar--background-color, 85%);
+
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: #fff;
+      }
+    }
+    .el-menu--popup-bottom-start {
+      background-color: $navbar--background-color;
+    }
+  }
+
+  &__header {
+    position: relative;
+    float: left;
+    //width: 230px;
+    height: 50px;
+    overflow: hidden;
+  }
+  &__brand {
+    display: table-cell;
+    vertical-align: middle;
+    //width: 230px;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+
+    &-lg,
+    &-mini {
+      margin: 0 5px;
+      color: #fff;
+      &:focus,
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+    &-mini {
+      display: none;
+    }
+  }
+  &__switch {
+    font-size: 18px;
+    border-bottom: none !important;
+  }
+  &__avatar {
+    border-bottom: none !important;
+    * {
+      vertical-align: inherit;
+    }
+    .el-dropdown-link {
+      > img {
+        width: 36px;
+        height: auto;
+        margin-right: 5px;
+        border-radius: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+  &__body {
+    position: relative;
+    //margin-left: 230px;
+    margin-left: 650px;
+    padding-right: 15px;
+    background-color: #fff;
+  }
+  &__menu {
+    float: left;
+    background-color: transparent;
+    border-bottom: 0;
+
+    &--right {
+      float: right;
+    }
+    a:focus,
+    a:hover {
+      text-decoration: none;
+    }
+    .el-menu-item,
+    .el-submenu > .el-submenu__title {
+      height: 50px;
+      line-height: 50px;
+    }
+    .el-submenu > .el-menu {
+      top: 55px;
+    }
+    .el-badge {
+      display: inline;
+      z-index: 2;
+      &__content {
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+
+/* Sidebar
+------------------------------ */
+.site-sidebar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  z-index: 1020;
+  width: 230px;
+  overflow: hidden;
+  &--dark,
+  &--dark-popper {
+    .el-menu{
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    background-color: $sidebar--background-color-dark;
+    .site-sidebar__menu.el-menu,
+    > .el-menu--popup {
+      background-color: $sidebar--background-color-dark;
+      .el-menu-item,
+      .el-submenu > .el-submenu__title {
+        color: $sidebar--color-text-dark;
+        &:focus,
+        &:hover {
+          color: mix(#fff, $sidebar--color-text-dark, 50%);
+          background-color: mix(#fff, $sidebar--background-color-dark, 2.5%);
+        }
+      }
+      .el-menu,
+      .el-submenu.is-opened {
+        //background-color: mix(#000, $sidebar--background-color-dark, 15%);
+      }
+      .el-menu--inline{
+        padding: 0;
+        background-color:$sidebar--background-color-dark ;
+        .el-submenu{
+          padding: 0!important;
+        }
+        .el-submenu >.el-submenu__title, .el-submenu~ .padding-40{
+          padding-left: 20px!important;
+        }
+        .el-submenu.is-opened > .el-submenu__title{
+          background-color:$sidebar--background-color-dark ;
+          color:$--theme-red!important;
+          border-left: 4px solid $--theme-red;
+          padding-left: 20px!important;
+          border-radius: 0!important;
+          box-sizing: border-box;
+        }
+        .el-submenu.is-opened > .el-submenu__title i{
+          color:$--theme-red;
+        }
+      }
+      .el-submenu.is-opened > .el-submenu__title{
+        background-color:$--theme-red ;
+        color:#fff!important;
+        border-radius: 8px;
+      }
+      .el-submenu.is-opened > .el-submenu__title i{
+        color:#fff;
+      }
+      .el-menu-item.is-active,
+      .el-submenu.is-active > .el-submenu__title {
+        //color: mix(#fff, $sidebar--color-text-dark, 80%);
+        color: $--theme-red;
+
+      }
+    }
+  }
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: 250px;
+    height: 100%;
+    padding-bottom: 15px;
+    overflow-y: scroll;
+  }
+  &__menu.el-menu {
+    width: 230px;
+    border-right: 0;
+  }
+  &__menu-icon {
+    width: 24px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: inherit !important;
+  }
+}
+
+
+/* Content
+------------------------------ */
+.site-content {
+  position: relative;
+  padding: 15px;
+
+  &__wrapper {
+    position: relative;
+    padding-top: 50px;
+    margin-left: 230px;
+    min-height: 100%;
+    background: $content--background-color;
+  }
+  &--tabs {
+    padding: 55px 0 0;
+  }
+  > .el-tabs {
+    > .el-tabs__header {
+      position: fixed;
+      top: 50px;
+      left: 230px;
+      right: 0;
+      z-index: 930;
+      padding: 0 55px 0 15px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
+      background-color: #fff;
+      > .el-tabs__nav-wrap {
+        margin-bottom: 0;
+        &:after {
+          display: none;
+        }
+      }
+    }
+    > .el-tabs__content {
+      padding: 0 15px 15px;
+      > .site-tabs__tools {
+        position: fixed;
+        top: 50px;
+        right: 0;
+        z-index: 931;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 16px;
+        line-height: 40px;
+        background-color: $content--background-color;
+        cursor: pointer;
+        .el-icon--right {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+.el-table__expand-icon {
+  display: inline-block;
+  width: 14px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.el-button--warning.is-disabled:hover,
+.el-button--warning.is-disabled,
+.el-button--primary,.el-button--warning,.el-button--danger,.el-button--danger:hover,
+.el-button--primary:hover,.el-button--warning:hover,.el-button--primary:focus,.el-button--warning:focus{
+  background:$--theme-red;
+  border: $--theme-red;
+}
+.el-button--warning.is-disabled:hover,.el-button--warning.is-disabled,.el-button--danger.is-disabled:hover,.el-button--danger.is-disabled,.el-button--primary.is-disabled:hover,.el-button--primary.is-disabled{
+  background: mix(#fff, $--theme-red, 60%);
+  border: mix(#fff, $--theme-red, 60%);
+}
+.project-box{
+  .el-input,input,.el-input__suffix i{
+    color:$--theme-red!important;
+  }
+}
+.el-table{
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top:0;
+  .el-table__header-wrapper{
+    padding-top: 10px;
+  }
+  thead tr,thead th{
+    background:#F5F5F7!important;
+    border-radius: 4px;
+  }
+}
+.el-tabs__nav{
+  .el-tabs__item{
+    color:$--theme-red!important;
+  }
+  .el-tabs__active-bar{
+    background-color:$--theme-red;
+  }
+}
+.list-left-tree,.list-left-tree .el-tree{
+  background: #FBFAFF;
+}
+.magnifier{
+  span:hover,td:hover{
+    font-size:$--magnifier-fontSize;
+  }
+}
+.new-zhedie{
+  width: 20px;
+  height: 40px;
+  line-height: 40px;
+  background: $--theme-red;
+  position: absolute;
+  top:40vh;
+  right:0;
+  font-size: 16px;
+  color: #fff;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+//登录页样式
+.site-wrapper.site-page--login {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*background-color: rgba(38, 50, 56, .6);*/
+  overflow: hidden;
+  &:before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-image: url(../img/bg-div.png);
+    /*background-size:  100% 100%;*/
+    background-size: 100% 100%;
+  }
+  .site-content__wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: transparent;
+  }
+  .site-content {
+    min-height: 100%;
+    padding: 30px 500px 30px 30px;
+  }
+  .brand-info {
+    margin: 220px 100px 0 90px;
+    color: #000;
+    text-shadow:5px 2px 6px #fff;
+  }
+  .brand-info__text {
+    margin:  0 0 22px 0;
+    font-size: 50px;
+    font-weight: bold;
+    text-transform : uppercase;
+  }
+  .brand-info__intro {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.58;
+    opacity: .6;
+  }
+  .login-main-div{
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+  .login-main {
+    margin: auto;
+    margin-top: 10vh;
+    padding: 50px;
+    width: 826px;
+    height: 509px;
+    background-image: url(../img/bg1-cs.png);
+    background-size:  100% 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .login-main>div{
+    width: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  .login-main-right{
+    padding:0 40px;
+    box-sizing: border-box;
+  }
+  .lm-left-title{
+    font-size: 36px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: #304155;
+  }
+  .lm-left-title-line{
+    width: 117px;
+    height: 2px;
+    background: $--theme-red;
+    margin-top: 13px;
+  }
+  .lm-left-img{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .lm-left-img>img{
+    width: 100%;
+    height: auto;
+  }
+  .site-content__wrapper{
+    height: 100%;
+    overflow: hidden;
+  }
+  .site-content{
+    padding: 0!important;
+    position: static;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .login-title{
+    text-align: center;
+  }
+  .login-title:after{
+    display: inline-block;
+    font-size: 20px;
+    font-family: Microsoft YaHei;
+    font-weight: bold;
+    color: $--theme-red;
+    line-height: 35px;
+    margin-bottom: 40px;
+    content: '医保基金现场检查系统';
+  }
+  .lm-right-input {
+    margin-bottom: 10px;
+    .el-input__inner{
+      border-color:$--theme-red;
+      border-radius: 20px;
+    }
+    .el-input__icon{
+      color: $--theme-red;
+    }
+  }
+  .login-captcha {
+    overflow: hidden;
+    > img {
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+  .login-btn-submit {
+    width: 100%;
+    margin-top: 38px;
+    border-radius: 20px;
+  }
+  .lm-left-title-new{
+    margin: auto;
+    margin-top: 20%;
+    text-align: center;
+  }
+  .lm-left-title-new>div{
+    width: 176px;
+    height: 80px;
+    background: url(../img/login-logo-cs.png) 100% 100% no-repeat;
+    display: inline-block;
+    margin-left: -40px;
+  }
+}
+
+//首页logo
+.navbar_header_new-title{
+  .navbar_header_new-img{
+    width: 88px;
+    height: 40px;
+    background: url(../img/login-logo-cs.png);
+    background-size: 100% 100%;
+    vertical-align: top;
+    margin-top: 5px;
+  }
+  .navbar_header_new-titlename:after{
+    font-weight: 600;
+    margin-left: 5px;
+    display: inline-block;
+    content: '医保基金现场检查系统';
+    color:#004EA0;
+  }
+}
+//首页样式
+.home-new{
+  .projectInfo,.todoList,.collectionList,.dataList{
+    .cardTitle{
+      border-left: 5px solid $--theme-red;
+      .cardMore{
+        color: $--theme-red;
+      }
+    }
+  }
+  .projectInfo{
+    .el-table thead tr, .el-table thead th {
+      background: $--theme-red !important;
+    }
+  }
+  .collectionList,.dataList{
+    .el-button--text,.el-button--text:focus, .el-button--text:hover {
+      color: $--theme-red;
+    }
+    .cardMore .el-button:focus,.cardMore .el-button:hover {
+      color: $--theme-red;
+    }
+    .el-button--danger{
+      color: $--theme-red;
+    }
+  }
+}
+
+.authoriza-left{
+  .userList-div:hover {
+    color: $--theme-red;
+  }
+  .active {
+    color: $--theme-red;
+  }
+}
+
+.search-form-new{
+  .el-input,.el-select,.el-date-editor{
+    width: 190px;
+    height: 35px;
+  }
+  .el-input input,.el-select input,.el-date-editor input{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.tstext,.mychat{
+  color: $--theme-red;
+}

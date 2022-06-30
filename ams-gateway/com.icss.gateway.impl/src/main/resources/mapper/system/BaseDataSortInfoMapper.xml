@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icss.gateway.dao.system.BaseDataSortInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.icss.gateway.model.system.BaseDataSortInfo">
+        <id column="DATA_SORT_ID" property="dataSortId" />
+        <result column="DATA_SORT_NAME" property="dataSortName" />
+        <result column="DATA_SORT_DESC" property="dataSortDesc" />
+        <result column="DATA_SORT_VALUE" property="dataSortValue" />
+        <result column="EDIT_TAG" property="editTag" />
+        <result column="EXTEND_TAG" property="extendTag" />
+        <result column="REMARK" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        DATA_SORT_ID, DATA_SORT_NAME, DATA_SORT_DESC, DATA_SORT_VALUE, EDIT_TAG, EXTEND_TAG, REMARK
+    </sql>
+
+</mapper>

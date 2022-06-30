@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icss.gateway.dao.personnelManagement.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.icss.gateway.model.personnelManagement.User">
+        <id column="USER_ID" property="userId" />
+        <result column="USER_MENU_REL_ID" property="userMenuRelId" />
+        <result column="USER_NUMBER" property="userNumber" />
+        <result column="USER_NAME" property="userName" />
+        <result column="USER_LOGIN_NAME" property="userLoginName" />
+        <result column="USER_PASSWORD" property="userPassword" />
+        <result column="USER_PHONE" property="userPhone" />
+        <result column="USER_SEX" property="userSex" />
+        <result column="CREATE_USER_NAME" property="createUserName" />
+        <result column="CREATE_USER_ID" property="createUserId" />
+        <result column="UPDATE_USER_NAME" property="updateUserName" />
+        <result column="UPDATE_USER_ID" property="updateUserId" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        USER_ID, USER_MENU_REL_ID, USER_NUMBER, USER_NAME, USER_LOGIN_NAME, USER_PASSWORD, USER_PHONE, USER_SEX, CREATE_USER_NAME, CREATE_USER_ID, UPDATE_USER_NAME, UPDATE_USER_ID, CREATE_TIME, UPDATE_TIME, IS_DELETE
+    </sql>
+
+</mapper>

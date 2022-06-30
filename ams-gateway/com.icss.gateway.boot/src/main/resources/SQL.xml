@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+
+    <sql id="selectUser">
+        <![CDATA[select * from all_users where username = '#loginName#']]>
+    </sql>
+    <sql id="createUser">
+        <![CDATA[CREATE USER "#loginName#" IDENTIFIED BY "#password#" DEFAULT TABLESPACE "#tablespacename#"]]>
+    </sql>
+    <sql id="grantConnect">
+        <![CDATA[GRANT "CONNECT" TO "#loginName#"]]>
+    </sql>
+    <sql id="grantDba">
+        <![CDATA[GRANT  "DBA" TO "#loginName#"]]>
+    </sql>
+    <sql id="grantResource">
+        <![CDATA[GRANT "RESOURCE" TO "#loginName#"]]>
+    </sql>
+    <sql id="alertDefaultRole">
+        <![CDATA[ALTER USER "#loginName#" DEFAULT ROLE "CONNECT", "DBA", "RESOURCE"]]>
+    </sql>
+    <sql id="grantTablespace">
+        <![CDATA[GRANT UNLIMITED TABLESPACE TO "#loginName#"]]>
+    </sql>
+    <sql id="createCountRows">
+        <![CDATA[ create or replace function count_rows(table_name in varchar2,
+        owner     in varchar2 default null)
+        return number authid current_user IS
+        num_rows number;
+        stmt    varchar2(2000);
+        begin
+        if owner is null then
+        stmt := 'select count(*) from "' || table_name || '"';
+        else
+        stmt := 'select count(*) from "' || owner || '"."' || table_name || '"';
+        end if;
+        execute immediate stmt
+        into num_rows;
+        return num_rows;
+        end; ]]>
+    </sql>
+
+    <sql id="dropUser">
+        <![CDATA[drop user #userName# cascade]]>
+    </sql>
+</sqls>

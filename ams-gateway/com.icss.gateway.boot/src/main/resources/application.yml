@@ -1,0 +1,50 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
+  application:
+    name: gateway #服务名称--调用的时候根据名称来调用该服务的方法
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/renren?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+#    username: root
+#    password: 123456
+
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #公司内网数据库
+    url: jdbc:oracle:thin:@10.10.23.21:1521:orcl
+    #外网数据库
+#    url: jdbc:oracle:thin:@111.200.255.51:29200:orcl
+    #    url: jdbc:oscar://10.10.23.92:2003/PD_ANALYSIS
+    username: rbfj
+    password: pass1009
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+      serialization:
+        write-dates-as-timestamps: false
+
+
+server:
+  port: 1070
+  servlet:
+    context-path: /gateway
+    session:
+      timeout: PT24H
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mybatis:
+  mapper-locations: classpath*:mapper/*/*Mapper.xml
+  config-location: classpath:mybatis-config.xml
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+pagehelper:
+  helperDialect: oracle
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

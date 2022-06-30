@@ -1,0 +1,28 @@
+@import "normalize";       // api: https://github.com/necolas/normalize.css/
+@import "variables";       // 站点变量
+@import "base";
+.table-list-img{
+  width: 50px;
+  height: 50px;
+  background: #eee;
+}
+.box-img{
+  position: relative;
+}
+.box-img-del{
+  color:red;
+  position: absolute;
+  top:0;
+  right: 0;
+  cursor: pointer;
+}
+.show-ellipsis{
+  width: 100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+  white-space:nowrap;
+  cursor: pointer;
+}
+
+

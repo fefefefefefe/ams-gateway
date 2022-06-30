@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icss.gateway.dao.system.BaseCodeInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.icss.gateway.model.system.BaseCodeInfo">
+        <id column="CODE_ID" property="codeId"/>
+        <result column="DATA_SORT_ID" property="dataSortId"/>
+        <result column="CODE_VALUE" property="codeValue"/>
+        <result column="CODE_NAME" property="codeName"/>
+        <result column="CODE_DESC" property="codeDesc"/>
+        <result column="CODE_STATE" property="codeState"/>
+        <result column="CODE_INDEX" property="codeIndex"/>
+        <result column="IS_DELETE" property="isDelete"/>
+        <result column="PARENT_CODE_ID" property="parentCodeId"/>
+        <result column="CREATE_USER_ID" property="createUserId"/>
+        <result column="CREATE_USER_NAME" property="createUserName"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_USER_ID" property="updateUserId"/>
+        <result column="UPDATE_USER_NAME" property="updateUserName"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CODE_INFO_EXT1" property="codeInfoExt1"/>
+        <result column="REMARK" property="remark"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CODE_ID, DATA_SORT_ID, CODE_VALUE, CODE_NAME, CODE_DESC, CODE_STATE, CODE_INDEX, IS_DELETE, PARENT_CODE_ID, CREATE_USER_ID, CREATE_USER_NAME, CREATE_TIME, UPDATE_USER_ID, UPDATE_USER_NAME, UPDATE_TIME, CODE_INFO_EXT1, REMARK
+    </sql>
+
+    <!-- 一次性查询整棵树-->
+    <select id="selectWholeTree" resultMap="BaseResultMap">
+        select * from (
+        select data_sort_id code_id, data_sort_value code_value, data_sort_name code_name, 'ROOT' parent_code_id
+        from gg_base_data_sort_info where DATA_SORT_VALUE=#{codeSortValue}
+        union
+        select a.code_id, a.code_value, a.code_name ,
+            nvl(a.parent_code_id, b.DATA_SORT_ID) parent_code_id
+             from gg_base_code_info a, gg_base_data_sort_info b
+        where a.data_sort_id=b.DATA_SORT_ID and b.DATA_SORT_VALUE=#{codeSortValue}  and IS_DELETE= 0
+        ) t  order by t.code_value asc
+    </select>
+    <!--查询树-->
+    <select id="selectTree" resultMap="BaseResultMap">
+        select * from gg_base_code_info where 1=1 AND IS_DELETE='0'
+        <if test="baseCodeInfo.dataSortId !=null and baseCodeInfo.dataSortId !=''">and
+            DATA_SORT_ID=#{baseCodeInfo.dataSortId}
+        </if>
+        <if test="baseCodeInfo.codeState !=null and baseCodeInfo.codeState !=''">and
+            CODE_STATE=#{baseCodeInfo.codeState}
+        </if>
+        <if test="baseCodeInfo.codeId !=null and baseCodeInfo.codeId !=''">and
+            PARENT_CODE_ID=#{baseCodeInfo.codeId}
+        </if>
+    </select>
+
+</mapper>
